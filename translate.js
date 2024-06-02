@@ -12,7 +12,8 @@ const projectId = 'virtual-cubist-399422';
 const location = 'global';
 /* const text = 'Hello, world!'; */
 
-async function translateText(text) {
+// inputs: (text, lang) -> we can get the lang sent in from background, we don't need any real pain in the ass stuff here
+async function translateText(text, targetLanguage) {
     // Construct request
 
 
@@ -21,7 +22,7 @@ async function translateText(text) {
         contents: [text],
         mimeType: 'text/plain', // mime types: text/plain, text/html
         sourceLanguageCode: 'en',
-        targetLanguageCode: 'ar',
+        targetLanguageCode: targetLanguage,
     };
 
     // Run request

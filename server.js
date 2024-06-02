@@ -11,6 +11,7 @@ app.get('/', (req, res) => {
 
 app.post('/', async (req, res) => {
     const data = req.body
+    const targetLanguageCode = req.body[1]
     console.log("Server - data received:", data)
     const responseData = []
     console.log("Recieved a post request ", data)
@@ -19,7 +20,7 @@ app.post('/', async (req, res) => {
         //console.log("Word: ", data[word])
         //const processedWord = data[word]
         // Uncomment this and everything should work correctly
-        const processedWord = await translate.translateText(data[word])
+        const processedWord = await translate.translateText(data[word], targetLanguageCode)
         responseData.push(processedWord)
     }
     //res.body = JSON.stringify(responseData)
