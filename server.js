@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const executeDatabase = require('./database.js')
+//const executeDatabase = require('./database.js')
 
 app.use(express.json())
 
@@ -14,7 +14,6 @@ app.get('/', (req, res) => {
 app.get('/database', async (req, res) => {
   //execute database.js
   res.send("Database code executed")
-  executeDatabase()
 })
 
 app.get('/new-route', (req, res) => {

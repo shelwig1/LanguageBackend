@@ -10,7 +10,6 @@ const translationClient = new TranslationServiceClient({
 
 const projectId = 'virtual-cubist-399422';
 const location = 'global';
-/* const text = 'Hello, world!'; */
 
 // inputs: (text, lang) -> we can get the lang sent in from background, we don't need any real pain in the ass stuff here
 async function translateText(text, targetLanguage) {
@@ -36,4 +35,4 @@ async function translateText(text, targetLanguage) {
 }
 
 
-module.exports = {translateText}
+module.exports = {translateText} 
