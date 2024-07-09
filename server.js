@@ -13,9 +13,13 @@ app.get('/', (req, res) => {
 
 app.get('/database', async (req, res) => {
   //execute database.js
-  executeDatabase()
   res.send("Database code executed")
+  executeDatabase()
 })
+
+app.get('/new-route', (req, res) => {
+  res.send('This is the new route!');
+});
 
 app.post('/', async (req, res) => {
     const data = req.body
