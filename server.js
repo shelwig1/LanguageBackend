@@ -11,9 +11,9 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/database', (req, res) => {
+app.get('/database', async (req, res) => {
   //execute database.js
-  //executeDatabase()
+  executeDatabase()
   res.send("Database code executed")
 })
 
