@@ -36,4 +36,4 @@ async function createTable() {
   //createTable().catch(err => console.error('Error in createTable:', err));
 
 
-export { createTable }
+module.exports = { createTable }

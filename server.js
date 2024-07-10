@@ -7,14 +7,16 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
 app.get('/database', async (req, res) => {
   //execute database.js
   res.send("Database code executed")
 })
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+
 
 app.get('/new-route', (req, res) => {
   res.send('This is the new route!');
