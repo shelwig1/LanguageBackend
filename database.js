@@ -11,7 +11,6 @@ async function sendQuery(query, values, useTransaction = false) {
     try {
         const result = await client.query(query, values)
         console.log("Successfully sent query: ", query)
-
         return result
     } catch (err) {
         console.log("Error with query: ", err)

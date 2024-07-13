@@ -38,6 +38,12 @@ app.post('/', async (req, res) => {
     //db.addActivityToDatabase(uuid, req.body[0].length)
 
     // Lets add the logic for caching words here - we can make some MONEY off this baby too freaking easy
+    /*
+      If it's only one word,
+        Do we have that word in that language in the translation table?
+        If not, translate it, then add the word in to the translation table
+
+    */
 
     const processedWord = await translate.translateText(data, targetLanguageCode)
     responseData.push(processedWord)
