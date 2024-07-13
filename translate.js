@@ -29,7 +29,7 @@ async function translateText(text, targetLanguage) {
 
 
     for (const translation of response.translations) {
-        console.log(`Translation: ${translation.translatedText}`);
+        //console.log(`Translation: ${translation.translatedText}`);
         return(translation.translatedText)
     }
 }

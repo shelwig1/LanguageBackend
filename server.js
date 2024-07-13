@@ -1,5 +1,7 @@
 const translate = require('./translate')
+const db = require('./database')
 const express = require('express');
+const createDatabase = require('./createDatabase')
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -7,48 +9,50 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json())
 
-app.get('/database', async (req, res) => {
-  //execute database.js
-  res.send("Database code executed")
-})
-
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-
+app.get('/database', async (req, res) => {
+  try {
+      await createDatabase.createTables()
+      res.send("Accessed database and created tables")
+  } catch (error) {
+      console.log("Error accessing database route: ", error)
+      res.status(500).send("Error accessing database route")
+    }
+})
 
 app.get('/new-route', (req, res) => {
   res.send('This is the new route!');
 });
 
+// This logic should be moved to a different file
 app.post('/', async (req, res) => {
-    const data = req.body
+    const uuid = req.headers['x-uuid']
+    const data = req.body[0]
     const targetLanguageCode = req.body[1]
-    console.log("Server - data received:", data)
     const responseData = []
-    console.log("Recieved a post request ", data)
-    console.log(data.length)
+
+    db.addUserToDatabase(uuid)
+    //db.addActivityToDatabase(uuid, req.body[0].length)
+
+    // Lets add the logic for caching words here - we can make some MONEY off this baby too freaking easy
+
+    const processedWord = await translate.translateText(data, targetLanguageCode)
+    responseData.push(processedWord)
+
+/* 
     for (const word in data) {
+        console.log("Requesting translation for: ", word)
         //console.log("Word: ", data[word])
         //const processedWord = data[word]
         // Uncomment this and everything should work correctly
 
-        /*
-          Who is sending the request?
-
-          Is this word in the database?
-            Yes - return the word with the correct language
-            No - run translateText and log the information in the database
-
-            Increment the count of the word occuring in the database
-
-            Return everything back over
-        */
 
         const processedWord = await translate.translateText(data[word], targetLanguageCode)
         responseData.push(processedWord)
-    }
+    } */
     //res.body = JSON.stringify(responseData)
     res.json(responseData)
 
